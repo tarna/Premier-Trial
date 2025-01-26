@@ -1,5 +1,6 @@
 import { ApplicationCommandOptionType, CommandInteraction, GuildMember, Role } from 'discord.js';
 import { Discord, Slash, SlashOption } from 'discordx';
+import { log } from '../../utils/logs';
 
 @Discord()
 export class AssignRoleCommand {
@@ -31,6 +32,8 @@ export class AssignRoleCommand {
         }
 
         user.roles.add(role);
-        interaction.reply({ content: `Assigned the role ${role.name} to ${user}`, ephemeral: true });
+        interaction.reply({ content: `Assigned the role ${role} to ${user}`, ephemeral: true });
+
+        log('Role Assigned', `${interaction.user.tag} assigned the role ${role} to ${user}`);
     }
 }

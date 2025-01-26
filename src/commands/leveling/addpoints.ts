@@ -3,6 +3,7 @@ import { Discord, Slash, SlashOption } from 'discordx';
 import { prisma } from '../..';
 import { config } from '../../config';
 import { placeholders } from '../../utils/functions';
+import { log } from '../../utils/logs';
 
 @Discord()
 export class AddPointsCommand {
@@ -48,5 +49,7 @@ export class AddPointsCommand {
             .setColor(addXpConfig.color);
         
         interaction.reply({ embeds: [embed] });
+
+        log('Points Added', `${interaction.user.tag} added ${amount} points to ${user.user.tag}`);
     }
 }

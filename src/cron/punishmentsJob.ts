@@ -3,6 +3,7 @@ import { client, prisma } from '..';
 import { PunishmentType } from '@prisma/client';
 import { getMutedRole } from '../utils/punishment';
 import { EmbedBuilder } from 'discord.js';
+import { log } from '../utils/logs';
 
 export default new CronJob('0 * * * * *', async () => {
     const punishments = await prisma.punishment.findMany({
@@ -36,9 +37,13 @@ export default new CronJob('0 * * * * *', async () => {
 
                 await user.roles.remove(mutedRole, 'Punishment expired.');
 
+                log('Mute Expired', `The mute against ${user.user.username} has expired.`);
+
                 break;
             case PunishmentType.BAN:
                 await guild.members.unban(punishment.userId, 'Punishment expired.');
+
+                log('Ban Expired', `The ban against ${user.user.username} has expired.`);
                 
                 break;
             default:

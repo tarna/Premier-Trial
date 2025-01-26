@@ -5,6 +5,7 @@ import { PunishmentType } from '@prisma/client';
 import ms from 'ms';
 import { config } from '../../config';
 import { placeholders } from '../../utils/functions';
+import { log } from '../../utils/logs';
 
 @Discord()
 export class BanCommand {
@@ -27,7 +28,7 @@ export class BanCommand {
         @SlashOption({
             name: 'duration',
             description: 'The duration of the ban.',
-            type: ApplicationCommandOptionType.Integer,
+            type: ApplicationCommandOptionType.String,
             required: false
         })
         duration: ms.StringValue | null,
@@ -62,5 +63,7 @@ export class BanCommand {
             .setColor(banConfig.color);
         
         interaction.reply({ embeds: [embed] });
+
+        log('User Banned', `${interaction.user.tag} banned ${user.user.tag} for ${duration ? ms(duration) : 'forever'} with reason: ${reason ?? 'No Reason Specified'}`);
     }
 }

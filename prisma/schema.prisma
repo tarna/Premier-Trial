@@ -86,7 +86,7 @@ enum PunishmentType {
 }
 
 model Fact {
-    id String @id
+    id String @id @default(uuid())
 
     message String
     usages  Int    @default(0)

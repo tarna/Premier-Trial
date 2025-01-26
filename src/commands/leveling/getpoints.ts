@@ -20,7 +20,7 @@ export class GetPointsCommand {
         const data = await prisma.user.findFirst({ where: { id: user.id } });
         if (!data) return interaction.reply({ content: 'User not found.', ephemeral: true })
 
-        const getPointsConfig = config.levels.messages.getpoitns;
+        const getPointsConfig = config.levels.messages.getpoints;
         const title = placeholders(getPointsConfig.title, { user: user.user.username });
         const description = placeholders(getPointsConfig.description, {
             user,

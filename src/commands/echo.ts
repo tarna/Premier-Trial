@@ -1,4 +1,4 @@
-import { EmbedBuilder, ModalBuilder, ModalSubmitInteraction, TextInputBuilder, type CommandInteraction } from 'discord.js';
+import { EmbedBuilder, ModalBuilder, ModalSubmitInteraction, TextInputBuilder, TextInputStyle, type CommandInteraction } from 'discord.js';
 import { Discord, ModalComponent, Slash } from 'discordx';
 import { actionRow } from '../utils/discord';
 
@@ -14,6 +14,7 @@ export class EchoCommand {
                     new TextInputBuilder()
                         .setCustomId('input')
                         .setLabel('Input')
+                        .setStyle(TextInputStyle.Paragraph)
                         .setPlaceholder('Enter your text here')
                         .setRequired(true)
                         .setMinLength(1)

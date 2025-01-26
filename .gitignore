@@ -176,3 +176,4 @@ dist
 
 # Other
 config.json
+*.db

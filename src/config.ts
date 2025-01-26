@@ -18,7 +18,7 @@ export interface Config {
             addxp: ConfigEmbed;
             getxp: ConfigEmbed;
             addpoints: ConfigEmbed;
-            getpoitns: ConfigEmbed;
+            getpoints: ConfigEmbed;
             levelUp: ConfigEmbed;
         }
     };

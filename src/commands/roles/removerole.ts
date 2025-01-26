@@ -1,5 +1,6 @@
 import { ApplicationCommandOptionType, CommandInteraction, GuildMember, Role } from 'discord.js';
 import { Discord, Slash, SlashOption } from 'discordx';
+import { log } from '../../utils/logs';
 
 @Discord()
 export class RemoveRoleCommand {
@@ -31,6 +32,8 @@ export class RemoveRoleCommand {
         }
 
         user.roles.remove(role);
-        interaction.reply({ content: `Removed the role ${role.name} from ${user}`, ephemeral: true });
+        interaction.reply({ content: `Removed the role ${role} from ${user}`, ephemeral: true });
+
+        log('Role Removed', `${interaction.user.tag} removed the role ${role} from ${user}`);
     }
 }

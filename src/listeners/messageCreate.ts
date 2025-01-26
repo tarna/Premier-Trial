@@ -1,5 +1,5 @@
 import { Discord, On, type ArgsOf } from 'discordx';
-import { prisma } from '..';
+import { messageCooldown, prisma } from '..';
 import { config } from '../config';
 import { evaluate } from 'mathjs';
 import { EmbedBuilder } from 'discord.js';
@@ -10,6 +10,9 @@ export class MessageCreateListener {
     @On({ event: 'messageCreate' })
     async onMessage([message]: ArgsOf<'messageCreate'>) {
         if (message.author.bot || !message.guild) return;
+
+        if (messageCooldown.isOnCooldown(message.author.id)) return;
+        messageCooldown.setCooldown(message.author.id);
 
         await prisma.message.create({
             data: {

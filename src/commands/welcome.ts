@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ChannelType, EmbedBuilder, ModalBuilder, ModalSubmitInteraction, TextChannel, TextInputBuilder, type CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionType, ChannelType, EmbedBuilder, ModalBuilder, ModalSubmitInteraction, TextChannel, TextInputBuilder, TextInputStyle, type CommandInteraction } from 'discord.js';
 import { Discord, ModalComponent, Slash, SlashGroup, SlashOption } from 'discordx';
 import { actionRow } from '../utils/discord';
 import { prisma } from '..';
@@ -13,11 +13,13 @@ export class WelcomeCommand {
     setWelcomeMessage(interaction: CommandInteraction) {
         const modal = new ModalBuilder()
             .setCustomId('setwelcome')
+            .setTitle('Set Welcome Message')
             .addComponents(
                 actionRow(
                     new TextInputBuilder()
                         .setCustomId('message')
                         .setLabel('Welcome Message')
+                        .setStyle(TextInputStyle.Paragraph)
                         .setPlaceholder('Enter the welcome message')
                         .setRequired(true)
                         .setMinLength(1)

@@ -6,6 +6,7 @@ import { config } from '../../config';
 import { placeholders } from '../../utils/functions';
 import ms from 'ms';
 import { canMute, getMutedRole } from '../../utils/punishment';
+import { log } from '../../utils/logs';
 
 @Discord()
 export class MuteCommand {
@@ -27,7 +28,7 @@ export class MuteCommand {
         @SlashOption({
             name: 'duration',
             description: 'The duration of the ban.',
-            type: ApplicationCommandOptionType.Integer,
+            type: ApplicationCommandOptionType.String,
             required: false
         })
         duration: ms.StringValue | null,
@@ -66,5 +67,7 @@ export class MuteCommand {
             .setColor(muteConfig.color);
         
         interaction.reply({ embeds: [embed] });
+
+        log('User Muted', `${interaction.user.tag} muted ${user.user.tag} for ${reason} ${duration ? `for ${ms(duration)}` : 'permanently'}`);
     }
 }

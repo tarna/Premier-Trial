@@ -4,6 +4,7 @@ import { prisma } from '../..';
 import { PunishmentType } from '@prisma/client';
 import { config } from '../../config';
 import { placeholders } from '../../utils/functions';
+import { log } from '../../utils/logs';
 
 @Discord()
 export class KickCommand {
@@ -51,5 +52,7 @@ export class KickCommand {
             .setColor(kickConfig.color);
         
         interaction.reply({ embeds: [embed] });
+
+        log('User Kicked', `${interaction.user.tag} kicked ${user.user.tag} for ${reason}`);
     }
 }
